@@ -1,0 +1,39 @@
+
+
+// TASK - {
+// TaskID: 123455,
+// userID: 204329775,
+// compamyID: "HOT",
+// title: "my sony tv dosent work",
+// date: "now date.."
+// status: "Active"
+// selectedSubject: "TV problem"
+// chat : [
+//         { from : userName , message: "blabla"},
+//         { from : HOT , message: "gagaga"},
+//         { from : userName , message: "blabla"}
+//     ],
+   
+    
+// }fr
+
+// // another collection of subjects, per company 
+// subject: {
+// Internet connection,
+// bad service,
+// TV problem..
+// Another
+// }
+
+// // another collection of users
+// user: {
+//     username:,
+//     password:,
+
+//     id:,
+//     name:,
+//     avatar:,
+//     isAdmin:
+
+
+// }

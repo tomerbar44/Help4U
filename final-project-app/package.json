@@ -1,0 +1,53 @@
+{
+  "name": "final-project",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@bit/recharts.recharts.composed-chart": "^1.6.2",
+    "@devexpress/dx-react-chart": "^2.3.2",
+    "@devexpress/dx-react-chart-material-ui": "^2.3.2",
+    "@devexpress/dx-react-core": "^2.3.2",
+    "@material-ui/core": "^4.8.3",
+    "@material-ui/icons": "^4.5.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "googleapis": "^46.0.0",
+    "mongo": "^0.1.0",
+    "mongoose": "^5.8.7",
+    "morgan": "^1.9.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.3.0",
+    "socket.io": "^2.3.0",
+    "swig": "^1.4.2",
+    "typeface-roboto": "0.0.75"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
+}
