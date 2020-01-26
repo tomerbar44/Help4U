@@ -92,7 +92,7 @@ export default function Store(props) {
 
 
     if (!socket) {
-        socket = io('https://obscure-journey-03610.herokuapp.com/',{
+        socket = io('https://floating-wave-00252.herokuapp.com/',{
             transports: [ 'websocket' ]
         });
         socket.on('chat message', function (message, from) {
