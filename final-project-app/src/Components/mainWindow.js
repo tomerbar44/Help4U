@@ -6,7 +6,7 @@ import ResponsoveDrawer from "./responsiveDrawer";
 import ChartBar from "../Components/chartBar";
 import Chat from "../Components/chat";
 import Task from "../Components/task";
-import ComposeChart from '../Components/composed-chart';
+// import ComposeChart from '../Components/composed-chart';
 
 
 
@@ -63,7 +63,7 @@ const MainWindow = props => {
                     </Grid>
                     <Grid item xs={4}>
                         {/* another option to show chart from Bit */}
-                        <ComposeChart />
+                        <ChartBar />
                     </Grid>
                 </Grid>
 
