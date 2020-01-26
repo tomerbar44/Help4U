@@ -13,9 +13,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'))
 
 
-app.use(express.static(path.join(__dirname,"../final-project-client-build/build") ));
+app.use(express.static(path.join(__dirname,"../final-project-app/build") ));
 app.get("*",(req,res) => {
-  app.use((req,res) => res.sendFile(path.join(__dirname,"../final-project-client-build/build/index.html")));
+  app.use((req,res) => res.sendFile(path.join(__dirname,"../../final-project-app/build/index.html")));
 });
 
 
