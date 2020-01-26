@@ -27,7 +27,7 @@ const MainWindow = props => {
     
     
             try {
-                res = await fetch('http://localhost:3000/Help4U/task/getTasksByUID?userID=305171159').then(res => res.json())
+                res = await fetch('https://floating-wave-00252.herokuapp.com/Help4U/task/getTasksByUID?userID=305171159').then(res => res.json())
                 // queryRes = React.createContext(res);
                 console.log('res MAIN WINDOW\n', res);
             }
