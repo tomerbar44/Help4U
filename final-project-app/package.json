@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@bit/recharts.recharts.composed-chart": "^1.6.2",
     "@devexpress/dx-react-chart": "^2.3.2",
     "@devexpress/dx-react-chart-material-ui": "^2.3.2",
     "@devexpress/dx-react-core": "^2.3.2",
