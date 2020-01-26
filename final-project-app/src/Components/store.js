@@ -92,7 +92,9 @@ export default function Store(props) {
 
 
     if (!socket) {
-        socket = io(':3000');
+        socket = io('https://obscure-journey-03610.herokuapp.com/',{
+            transports: [ 'websocket' ]
+        });
         socket.on('chat message', function (message, from) {
             setChats(prevChats => ([
                 ...prevChats, {
