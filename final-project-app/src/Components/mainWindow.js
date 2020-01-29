@@ -9,15 +9,10 @@ import Task from "../Components/task";
 // import ComposeChart from '../Components/composed-chart';
 
 
-
-
 let res;
-let queryRes;
 
 
 const MainWindow = props => {
-
-    // const [allTasks, setAllTasks] = React.useState([])
 
     const [allUsersTasks, setAllUsersTasks] = React.useState([])
 
@@ -27,10 +22,10 @@ const MainWindow = props => {
     
     
             try {
-                res = await fetch('https://floating-wave-00252.herokuapp.com/Help4U/task/getTasksByUID?userID=305171159').then(res => res.json())
-                // queryRes = React.createContext(res);
+                res = await fetch('https://mern-finalproj-api.herokuapp.com/Help4U/task/getTasksByUID?userID=305171159').then(res => res.json())
+            
                 
-                console.log('res MAIN WINDOW\n', res);
+
             }
             catch (e) {
                 console.log(e);
@@ -38,7 +33,6 @@ const MainWindow = props => {
     
             if (res.status == 200 && res.data != null ) {
     
-                // let tasks = res.data;
                 setAllUsersTasks(res.data)
     
             }

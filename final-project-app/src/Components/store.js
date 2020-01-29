@@ -92,7 +92,7 @@ export default function Store(props) {
 
 
     if (!socket) {
-        socket = io('https://floating-wave-00252.herokuapp.com/',{
+        socket = io('https://mern-finalproj-api.herokuapp.com/',{
             transports: [ 'websocket' ]
         });
         socket.on('chat message', function (message, from) {
@@ -109,7 +109,7 @@ export default function Store(props) {
     return (
 
         <CTX.Provider value={{ user, chats, sendChatAction }}>
-            {toTask ? <Redirect to="/"/> : null}
+            {/* {toTask ? <Redirect to="/"/> : null} */}
             {props.children}
 
             {/* {console.log('props.children',props.children)} */}

@@ -14,6 +14,7 @@ import { blue } from '@material-ui/core/colors';
 import Link from '@material-ui/core/Link';
 // const urlGoogle = require('../server/google-util');
 
+
 const useStyles = makeStyles(theme => ({
     root: {
         '& > *': {
@@ -32,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     },
     chatWindow: {
         width: '70%',
-        height: '300px',
+        minHeight: '275px',
         padding: "20px"
     },
     chatBox: {
@@ -41,7 +42,14 @@ const useStyles = makeStyles(theme => ({
     button: {
         width: '15%'
     },
+    chip: {
+        marginBottom: '14px',
+        minWidth: '120px',
+
+        
+    }
 }));
+
 
 
 // every time we type, we change the state via ChangeTextValue, and because of that we reRender the component and will see all things be4 the return ? ? 
@@ -65,7 +73,7 @@ export default function Dashboard() {
 
 
     return (
-        <div >
+        
             <Paper variant="outlined" className={classes.root} >
 
                 <Typography variant="h4" component="h4">Chat app
@@ -109,7 +117,7 @@ export default function Dashboard() {
                                 
                                 <div className={classes.flex} key={i}>
                                     {/* {console.log('one chat at deshboard\n',chat)} */}
-                                    <Chip label={chat.from} style={chat.from === user ? { backgroundColor: '#5c6bc0' } : { backgroundColor: '#7e57c2' }} />
+                                    <Chip label={chat.from} style={chat.from === user ? { backgroundColor: '#5c6bc0' } : { backgroundColor: '#7e57c2' }} className={classes.chip} />
                                     <Typography variant='body1' gutterBottom style={{ paddingLeft: "8px" }}> {chat.message} </Typography>
                                 </div>
 
@@ -145,7 +153,7 @@ export default function Dashboard() {
                 </div>
             </Paper>
 
-        </div>
+        
 
     )
 }
