@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField'
 import SubjectTab from './subjectsList'
 import Snackbar from '@material-ui/core/Snackbar'
 import MuiAlert from '@material-ui/lab/Alert'
-import Box from '@material-ui/core/box'
+import Box from '@material-ui/core/Box'
 import { Redirect } from 'react-router-dom'
 
 function Alert(props) {
