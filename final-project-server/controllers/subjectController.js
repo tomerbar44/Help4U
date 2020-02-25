@@ -1,4 +1,4 @@
-const model = require('../dal/subjectSchema');
+const model = require('../models/subjectSchema');
 
 async function getSubjects(req, res) {
     try {

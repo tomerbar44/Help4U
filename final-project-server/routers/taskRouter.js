@@ -1,40 +1,25 @@
 const express = require('express');
-const url = require("url");
 const router = express.Router();
 const controller = require('../controllers/taskController');
 
 
-router.get('/getTasksByUID', (req, res) => {
-    const urlObject = url.parse(req.url, true, false);
-    req.userID = urlObject.query.userID;
+router.get('/user/:userID', (req, res) => {
     controller.getTasksUser(req, res);
 });
 
-router.get('/getTasksByCID', (req, res) => {
-    const urlObject = url.parse(req.url, true, false);
-    req.companyID = urlObject.query.companyID;
+router.get('/company/:companyID', (req, res) => {
     controller.getTasksCompany(req, res);
 });
 
-router.post('/addTask', (req, res) => {
+router.post('/add', (req, res) => {
     controller.createNewTask(req, res);
 });
 
-router.put('/updateStatus', (req, res) => {
-    const urlObject = url.parse(req.url, true, false);
-    req.taskID = urlObject.query.taskID;
+router.put('/update/:taskID', (req, res) => {
     controller.updateStatusTask(req, res);
 });
 
-router.put('/updateChat', (req, res) => {
-    const urlObject = url.parse(req.url, true, false);
-    req.taskID = urlObject.query.taskID;
-    controller.updateChatTask(req, res);
-});
-
-router.delete('/deleteTask', (req, res) => {
-    const urlObject = url.parse(req.url, true, false);
-    req.taskID = urlObject.query.taskID;
+router.delete('/:taskID', (req, res) => {
     controller.deleteTask(req, res);
 });
 

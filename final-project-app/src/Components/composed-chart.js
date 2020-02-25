@@ -1,55 +1,114 @@
-import React, { PureComponent } from 'react';
-import ComposedChart from '@bit/recharts.recharts.composed-chart';
-import Line from '@bit/recharts.recharts.line';
-// import Area from '@bit/recharts.recharts.area';
-import Bar from '@bit/recharts.recharts.bar';
-import XAxis from '@bit/recharts.recharts.x-axis';
-import YAxis from '@bit/recharts.recharts.y-axis';
-// import CartesianGrid from '@bit/recharts.recharts.cartesian-grid';
-import Tooltip from '@bit/recharts.recharts.tooltip';
-import Legend from '@bit/recharts.recharts.legend';
- 
-const data = [
-	{
-		name: 'Page A', uv: 590, pv: 800, amt: 1400,
-	},
-	{
-		name: 'Page B', uv: 868, pv: 967, amt: 1506,
-	},
-	{
-		name: 'Page C', uv: 1397, pv: 1098, amt: 989,
-	},
-	{
-		name: 'Page D', uv: 1480, pv: 1200, amt: 1228,
-	},
-	{
-		name: 'Page E', uv: 1520, pv: 1108, amt: 1100,
-	},
-	{
-		name: 'Page F', uv: 1400, pv: 680, amt: 1700,
-	},
-];
 
-export default class Example extends PureComponent {
-	render() {
-		return (
-			<ComposedChart
-				width={500}
-				height={400}
-				data={data}
-				margin={{
-					top: 20, right: 20, bottom: 20, left: 20,
-                }}
-                
-			>
-				{/* <CartesianGrid stroke="#f5f5f5" /> */}
-				<XAxis dataKey="name" />
-				<YAxis />
-				<Tooltip />
-				<Legend />
-				<Bar dataKey="uv" barSize={20} fill="#413ea0" />
-				<Line type="monotone" dataKey="uv" stroke="#ff7300" />
-			</ComposedChart>
-		);
-	}
+import React, { useEffect, useState } from 'react'
+import Paper from '@material-ui/core/Paper'
+import {
+  Chart,
+  ArgumentAxis,
+  ValueAxis,
+  BarSeries,
+  Legend,
+  Title,
+  Tooltip
+} from '@devexpress/dx-react-chart-material-ui'
+import { EventTracker, HoverState, Stack, SelectionState } from '@devexpress/dx-react-chart'
+import { withStyles } from '@material-ui/core/styles'
+
+// map of sub
+const ageStructure = [
+  { A: 5, C: 2, state: 'WIFI problem' },
+  { A: 5, C: 4, state: 'TV problem' }
+
+]
+
+const styles = {
+  titleText: {
+	  textAlign: 'center'
+  },
+  legend: {
+	  display: 'contents'
+  }
+}
+
+const TextComponent = withStyles(styles)(({ classes, ...restProps }) => (
+
+  <Title.Text {...restProps} className={classes.titleText} />
+))
+
+const LableComponent = withStyles(styles)(({ classes, ...restProps }) => (
+  <Legend.Root {...restProps} className={classes.legend} />
+))
+
+const stacks = [
+  { series: ['📒 Active', '✅ Completed'] }
+]
+
+// const tooltip =
+
+// delete state
+export default function ComposedChart (props) {
+  const [chartData, setChartData] = useState([])
+  // const [targetItem, setTargetItem] = useState()
+
+  const { allTasks } = props
+
+  const calcSubjects = () => {
+    const subMap = new Map()
+
+    allTasks.forEach((oneTask) => {
+      const ob = subMap.get(oneTask.selectedSubject)
+      if (ob !== undefined) {
+        oneTask.status === 'Completed' ? ob.C += 1 : ob.A += 1
+      } else {
+        subMap.set(oneTask.selectedSubject, oneTask.status === 'Completed' ? { A: 0, C: 1, state: oneTask.selectedSubject } : { A: 1, C: 0, state: oneTask.selectedSubject })
+      }
+    })
+    // getting the values of map == the data for table
+    const values = Array.from(subMap.values())
+    setChartData(values)
+    console.log('subMap!\n', subMap)
+    console.log('chartData!\n', chartData)
+  }
+
+  // const addSubject = ({A: 0, C:0, state: ''}) => {
+
+  // }
+
+  useEffect(() => {
+    calcSubjects()
+    // console.log('chartProps\n', props)
+  }, [allTasks])
+
+  return (
+    <Paper>
+      <Chart
+	  data={chartData}
+
+      >
+		  <BarSeries
+			  name="📒 Active"
+			  valueField="A"
+			  argumentField="state"
+			  color='#ffb946'
+
+		  />
+	  <BarSeries
+          name="✅ Completed"
+          valueField="C"
+          argumentField="state"
+		  color='#2ed47a'
+	  />
+	  <ArgumentAxis />
+	  <ValueAxis />
+	  <Stack
+          stacks={stacks}
+	  />
+	  <EventTracker />
+	  <Tooltip />
+	  <HoverState />
+	  <Title text="📋 All Tasks" textComponent={TextComponent}/>
+	  <Legend position='bottom' rootComponent={LableComponent} />
+      </Chart>
+    </Paper>
+  )
+//   }
 }

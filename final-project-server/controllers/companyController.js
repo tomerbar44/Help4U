@@ -1,4 +1,4 @@
-const model = require('../dal/companySchema');
+const model = require('../models/companySchema');
 
 async function getCompanies(req, res) {
     try {

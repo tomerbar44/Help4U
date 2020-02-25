@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/subjectController');
+const controller = require('../controllers/intentionsController');
 
-router.get('/', (req, res) => {
-    controller.getSubjects(req, res);
+router.post('/', (req, res) => {
+    controller.addIntentions(req, res);
 });
 
 // default route

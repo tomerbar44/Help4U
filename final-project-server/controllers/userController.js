@@ -1,13 +1,13 @@
-const model = require('../dal/userSchema');
+const model = require('../models/userSchema');
 
-// check if user exists in our system by google id_token, if yes send in the data the authorization of the user
+// check if user exists in our system by google_id, if yes send in the data the authorization (admin or client) of the user and his company if he admin
 async function checkUser(req, res) {
     try {
-        const data = await model.findUser(req.body.id_token);
-        if (data.length == 0) {
+        const data = await model.findUser(req.body.google_id);
+        if (data == null) {
             res.status(200).json({
                 status: 200,
-                message: "No user was found for this id_token",
+                message: "No user was found for this google_id",
                 action: "Read",
                 data: null
             });
@@ -16,7 +16,7 @@ async function checkUser(req, res) {
                 status: 200,
                 message: "success",
                 action: "Read",
-                data: data[0].authorization
+                data: {admin:data.isAdmin,company:data.company}
             })
         }
     } catch (err) {
@@ -29,10 +29,10 @@ async function checkUser(req, res) {
     }
 
 }
-
+// create new client user
 async function createClientUser(req, res) {
     try {
-        const data = await model.createNewClientUser(req.body);
+        const data = await model.createNewClientUser(req.body.google_id);
         res.status(200).json({
             status:200,
             message: "success",
@@ -49,8 +49,37 @@ async function createClientUser(req, res) {
         })
     }
 }
+// update access token to admin user, to allow admin actions, happen in admin login
+async function updateToken(req, res) {
+    try {
+        const data = await model.updateToken(req.body.google_id,req.body.access_token);
+        if (data == null) {
+            res.status(200).json({
+                status: 200,
+                message: "No user/ admin was found for this google_id",
+                action: "Update",
+                data: false
+            });
+        } else {
+            res.status(200).json({
+                status: 200,
+                message: "success",
+                action: "Update",
+                data: true
+            })
+        }
+    } catch (err) {
+        res.status(500).json({
+            status: 500,
+            message: err.message,
+            action: "Update",
+            data: null
+        })
+    }
+}
 
 module.exports = {
     checkUser,
-    createClientUser
+    createClientUser,
+    updateToken
 };
