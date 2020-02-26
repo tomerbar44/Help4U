@@ -50,7 +50,7 @@ export default function Intentions() {
 
   async function addIntention(title, subject) {
     try {
-      const response = await fetch('https://final-projet-here4u.herokuapp.com/Help4U/intentions', {
+      const response = await fetch('https://mern-finalproj-api.herokuapp.com/Help4U/intentions', {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json'

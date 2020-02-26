@@ -37,7 +37,7 @@ export default function Store (props) {
       }
     }
 
-    socket = io('https://final-projet-here4u.herokuapp.com/', {
+    socket = io('https://mern-finalproj-api.herokuapp.com/', {
       transports: ['websocket']
     })
 

@@ -107,7 +107,7 @@ function ResponsiveDrawer (props) {
 
     async function fetchUserTasks () {
       try {
-        res = await fetch(`https://final-projet-here4u.herokuapp.com/Help4U/task/user/${sessionStorage.getItem('user_id')}`)
+        res = await fetch(`https://mern-finalproj-api.herokuapp.com/Help4U/task/user/${sessionStorage.getItem('user_id')}`)
           .then(res => res.json())
         fetchHandler(res)
       } catch (e) {
@@ -122,7 +122,7 @@ function ResponsiveDrawer (props) {
     async function fetchCompanyTasks () {
       try {
         // add to request admins access token
-        res = await fetch(`https://final-projet-here4u.herokuapp.com/Help4U/task/company/${sessionStorage.getItem('company_name')}`, {
+        res = await fetch(`https://mern-finalproj-api.herokuapp.com/Help4U/task/company/${sessionStorage.getItem('company_name')}`, {
           method: 'GET',
           mode: 'cors',
           headers: new Headers({
