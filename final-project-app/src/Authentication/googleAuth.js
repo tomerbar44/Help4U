@@ -100,8 +100,7 @@ const isAuthenticated = () => {
 const signupUser = (response) => {
   async function signup () {
     try {
-      const user = await fetch('https://final-projet-
-here4u.herokuapp.com/Help4U/user/create', {
+      const user = await fetch('https://final-projet-here4u.herokuapp.com/Help4U/user/create', {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json; charset=utf-8'
