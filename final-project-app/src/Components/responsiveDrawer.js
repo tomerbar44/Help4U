@@ -48,7 +48,9 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth
-    }
+    },
+    backgroundColor: 'white',
+    color: "black"
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -71,7 +73,33 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: 'auto'
-  }
+  },
+  chatStatistc :{
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+    [theme.breakpoints.up('md')]: {
+      // display: 'none',
+    },
+    [theme.breakpoints.up('lg')]: {
+    
+    },
+  },
+  taskResponsive:{
+    [theme.breakpoints.down('sm')]: {
+      width: '300px',
+    },
+    
+    [theme.breakpoints.between('sm', 'md')]: {
+      // display: 'none',
+      // width: '300px',
+      width: '300px',
+    },
+    [theme.breakpoints.up('lg')]: {
+    
+    },
+
+  },
 }))
 
 // send to db evrey  chat message
@@ -192,16 +220,24 @@ function ResponsiveDrawer (props) {
 
             <Grid container spacing={2}>
               <Grid item md={8} >
-                <Route exact path="/home" > <Task allTasks={allUsersTasks} activeOnly={true} /> </Route>
+                <Route exact path="/home" > <div className={classes.taskResponsive}> <Task allTasks={allUsersTasks} activeOnly={true} /></div> </Route>
                 <Route path="/home/chat" > <Chat allTasks={allUsersTasks} setAllUsersTasks = {setAllUsersTasks} /> </Route>
-                <Route path="/home/tasks" > <Task allTasks={allUsersTasks} activeOnly={false} /> </Route>
-                <Route path="/home/contacts" >{JSON.parse(sessionStorage.getItem('isAdmin')) ? <Contacts allTasks={allUsersTasks} /> : <NotAllowPage/>}</Route>
-                <Route path="/home/create" >{JSON.parse(sessionStorage.getItem('isAdmin')) ? <NotAllowPage/> : <Form allTasks={allUsersTasks} setAllUsersTasks = {setAllUsersTasks}/>} </Route>
-                <Route path="/home/train subject" >{JSON.parse(sessionStorage.getItem('isAdmin')) ? <Intentions/> : <NotAllowPage/>}  </Route>
+                <Route path="/home/tasks" > <div className={classes.taskResponsive}> <Task allTasks={allUsersTasks} activeOnly={false} /></div> </Route>
+                <Route path="/home/contacts" ><div className={classes.taskResponsive}>{JSON.parse(sessionStorage.getItem('isAdmin')) ? <Contacts allTasks={allUsersTasks} /> : <NotAllowPage/>}</div></Route>
+                <Route path="/home/create" ><div className={classes.taskResponsive}>{JSON.parse(sessionStorage.getItem('isAdmin')) ? <NotAllowPage/> : <Form setAllUsersTasks = {setAllUsersTasks}/>} </div></Route>
+                <Route path="/home/train subject" ><div className={classes.taskResponsive}>{JSON.parse(sessionStorage.getItem('isAdmin')) ? <Intentions/> : <NotAllowPage/>} </div> </Route>
               </Grid>
               <Grid item md={4}>
-                <ComposeChart allTasks={allUsersTasks} />
-                <MyPieChart allTasks={allUsersTasks} ></MyPieChart>
+              {
+              
+              (window.location.pathname.split('/')[2]) == 'chat' || (window.location.pathname.split('/')[2]) == 'create' ? 
+              <div className={classes.chatStatistc}><ComposeChart allTasks={allUsersTasks} /><MyPieChart allTasks={allUsersTasks} ></MyPieChart></div> : 
+              <div className={classes.taskResponsive}><ComposeChart allTasks={allUsersTasks} /><MyPieChart allTasks={allUsersTasks} ></MyPieChart></div>
+              
+              }
+              
+                {/* <ComposeChart allTasks={allUsersTasks} />
+                <MyPieChart allTasks={allUsersTasks} ></MyPieChart> */}
               </Grid>
             </Grid>
           </Box>

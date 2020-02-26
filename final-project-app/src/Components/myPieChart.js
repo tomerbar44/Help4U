@@ -8,7 +8,6 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-// import PieChart from 'react-minimal-pie-chart'
 import PieChart from 'react-minimal-pie-chart'
 import { Box } from '@material-ui/core'
 import { render } from 'react-dom'
@@ -40,21 +39,18 @@ export default function MyPieChart (props) {
 
   useEffect(() => {
     countRatio()
-    // console.log('allTasks\n', allTasks)
   }, [allTasks])
 
   const countRatio = () => {
-    // console.log('insideCountRatio\n')
-    dataArr.length = 0
-    dataArr.push({ title: 'Completed', value: 0, color: '#2ED47A' },
+    const arr = []
+
+    arr.push({ title: 'Completed', value: 0, color: '#2ED47A' },
       { title: 'Active', value: 0, color: '#FFB946' })
 
     allTasks.forEach((oneTask, i) => {
-      // console.log('oneTask.status\n', oneTask.status)
-      oneTask.status === 'Active' ? dataArr[1].value += 1 : dataArr[0].value += 1
-      // parnetSet(parentTasks => parentTasks.map(task => task.taskID !== taskID ? task : res.data))
+      oneTask.status === 'Active' ? arr[1].value += 1 : arr[0].value += 1
     })
-    setDataArr((p) => p.map(a => a))
+    setDataArr(arr)
   }
 
   return (

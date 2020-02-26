@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     right: 0,
     top: 0,
     bottom: 0,
-    backgroundColor: '#3f51b5',
+    backgroundColor: 'white',
     transition: theme.transitions.create('opacity')
   },
 

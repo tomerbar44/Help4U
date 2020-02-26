@@ -13,13 +13,8 @@ import Loader from '../Components/loader'
 export default function SimpleTable(props) {
   const { allTasks } = props
   const [rows, setRows] = useState([]);
-  const [state, setState] = React.useState({
-    open: false,
-    vertical: 'top',
-    horizontal: 'center',
-    desc: ''
-  });
-  const { vertical, horizontal, open } = state;
+  const [state, setState] = React.useState({ open: false, desc: ''});
+  const { open } = state;
 
   const handleHover = newState => () => {
     setState({ open: true, ...newState });
@@ -31,10 +26,10 @@ export default function SimpleTable(props) {
 
 
   useEffect(() => {
-    analysData(allTasks)
+    analyseData(allTasks)
   },[allTasks]);
 
-  const analysData = (allTasks) => {
+  const analyseData = (allTasks) => {
     let myMap = new Map();
     let array = [];
     allTasks.map(task => {
@@ -82,10 +77,10 @@ export default function SimpleTable(props) {
                 </TableCell>
                 <TableCell align="center">{row.active}</TableCell>
                 <TableCell align="center">{row.completed}</TableCell>
-                <TableCell style={{ cursor: "help" }} onMouseOver={handleHover({ vertical: 'top', horizontal: 'center', desc: row.subjects })} onMouseLeave={handleClose} align="center">{row.len}</TableCell>
+                <TableCell style={{ cursor: "help" }} onMouseOver={handleHover({ desc: row.subjects })} onMouseLeave={handleClose} align="center">{row.len}</TableCell>
                 <Snackbar
-                  anchorOrigin={{ vertical, horizontal }}
-                  key={`${vertical},${horizontal}`}
+                  anchorOrigin={ {vertical: 'top',horizontal: 'center'}}
+                  key={`${'top'},${'center'}`}
                   open={open}
                   message={state.desc}
                 />

@@ -1,14 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
-// import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Paper from '@material-ui/core/Paper'
 import Box from '@material-ui/core/Box'
-// import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-// import amber from '@material-ui/core/colors/amber'
-// import { get } from 'mongoose'
+
 import {
   Chip
   //  List,
@@ -29,11 +26,6 @@ const useStyles = makeStyles(theme => ({
   card: {
     minWidth: '100%'
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)'
-  },
   title: {
     fontSize: 14
   },
@@ -53,12 +45,6 @@ const useStyles = makeStyles(theme => ({
   },
   navLinks: {
     textDecorationLine: 'none'
-    // padding: 20
-  },
-  list: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
   },
   box: {
     margin: theme.spacing(3)

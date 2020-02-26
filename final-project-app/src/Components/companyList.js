@@ -50,21 +50,22 @@ export default function ScrollableTabsButtonAuto (props) {
   const classes = useStyles()
   const [value, setValue] = React.useState(0)
   const [companies, setCompanies] = React.useState(null)
-  let currentCompany = ''
-  let res
+  let currentCompanyName = ''
+  
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
-    currentCompany = companies[newValue].name
-    sendData(currentCompany)
+    currentCompanyName = companies[newValue].name
+    sendData(currentCompanyName)
   }
 
-  const sendData = (currentCompany) => {
-    props.parentCallback(currentCompany)
+  const sendData = (currentCompanyName) => {
+    props.changeCompanyName(currentCompanyName)
   }
 
   useEffect(() => {
     async function initCompanies () {
+      let res
       try {
         res = await fetch('https://mern-finalproj-api.herokuapp.com/Help4U/companies').then(res => res.json())
       } catch (e) {
@@ -76,6 +77,7 @@ export default function ScrollableTabsButtonAuto (props) {
       }
       if (res.status == 200 && res.data != null) {
         setCompanies(res.data)
+        sendData(res.data[0].name) // the first tab is selected
       }
     }
     initCompanies()

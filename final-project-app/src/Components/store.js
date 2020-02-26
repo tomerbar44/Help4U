@@ -7,7 +7,6 @@ export const CTX = React.createContext()
 
 // useRef
 let socket
-// h
 export default function Store (props) {
   const { allTasks, setAllUsersTasks } = props
   let oneTask = null
@@ -52,12 +51,8 @@ export default function Store (props) {
           }]
         setAllUsersTasks(allTasks => allTasks.map(oneTask => {
           if (oneTask.taskID === parseInt(window.location.pathname.split('/')[3])) {
-            console.log('equals')
-            console.log('message = ', message)
-            console.log('from = ', from)
             return ({ ...oneTask, chat: f })
           }
-          console.log('NOT equals')
           return oneTask
         }))
         return f

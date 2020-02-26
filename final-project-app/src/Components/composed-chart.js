@@ -13,12 +13,6 @@ import {
 import { EventTracker, HoverState, Stack, SelectionState } from '@devexpress/dx-react-chart'
 import { withStyles } from '@material-ui/core/styles'
 
-// map of sub
-const ageStructure = [
-  { A: 5, C: 2, state: 'WIFI problem' },
-  { A: 5, C: 4, state: 'TV problem' }
-
-]
 
 const styles = {
   titleText: {
@@ -42,13 +36,9 @@ const stacks = [
   { series: ['📒 Active', '✅ Completed'] }
 ]
 
-// const tooltip =
 
-// delete state
 export default function ComposedChart (props) {
   const [chartData, setChartData] = useState([])
-  // const [targetItem, setTargetItem] = useState()
-
   const { allTasks } = props
 
   const calcSubjects = () => {
@@ -65,31 +55,22 @@ export default function ComposedChart (props) {
     // getting the values of map == the data for table
     const values = Array.from(subMap.values())
     setChartData(values)
-    console.log('subMap!\n', subMap)
-    console.log('chartData!\n', chartData)
   }
-
-  // const addSubject = ({A: 0, C:0, state: ''}) => {
-
-  // }
 
   useEffect(() => {
     calcSubjects()
-    // console.log('chartProps\n', props)
   }, [allTasks])
 
   return (
     <Paper>
       <Chart
 	  data={chartData}
-
       >
 		  <BarSeries
 			  name="📒 Active"
 			  valueField="A"
 			  argumentField="state"
 			  color='#ffb946'
-
 		  />
 	  <BarSeries
           name="✅ Completed"
@@ -100,7 +81,7 @@ export default function ComposedChart (props) {
 	  <ArgumentAxis />
 	  <ValueAxis />
 	  <Stack
-          stacks={stacks}
+      stacks={stacks}
 	  />
 	  <EventTracker />
 	  <Tooltip />
@@ -110,5 +91,4 @@ export default function ComposedChart (props) {
       </Chart>
     </Paper>
   )
-//   }
 }

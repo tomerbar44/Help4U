@@ -65,9 +65,6 @@ const successGoogle = (response) => {
 const setSession = (response, userData) => {
   // session is available for 1h
   const expiresAt = JSON.stringify((response.tokenObj.expires_in * 1000) + new Date().getTime())
-  console.log('response.tokenObj.expires_in\n', response.tokenObj.expires_in)
-
-  console.log('response.tokenObj.access_token\n', response.uc.access_token)
   sessionStorage.setItem('expires_at', expiresAt)
   sessionStorage.setItem('isAdmin', userData.admin)
   sessionStorage.setItem('user_name', response.Rt.Ad)
@@ -109,7 +106,6 @@ const signupUser = (response) => {
         body: JSON.stringify({ google_id: response.googleId })
 
       }).then(user => user.json())
-      console.log('newUser\n', user)
       setSession(response, { admin: false, company: '' })
       history.replace('/home')
     } catch (e) {
@@ -167,8 +163,6 @@ const GoogleOut = (props) => {
 
 const Here4uSignup = (props) => {
   const { message } = props
-  console.log('inside here4uSignin')
-
   return (
     <>
       <Typography component="h5" variant="h6" style={{ marginBottom: '50px' }}>
