@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     width: '200px'
   },
   company: {
-    marginBottom: '10px'
+    marginBottom: '15px'
   }
 
 }))
@@ -107,20 +107,22 @@ export default function Form (props) {
   return (
     <Box mx="auto" >
       <Paper variant="outlined" className={classes.root} >
+      {<img style={{ float: 'right' }} src="https://img.icons8.com/doodle/80/000000/technical-support.png" />}
         <Typography className={classes.title}>
           <TextField
             required
             id="Title"
             name="Title"
-            label="TITLE"
+            label="Title"
             fullWidth
             onChange={e => {
               changeTitleValue(e.target.value)
             }}
           />
         </Typography>
+       
         <Box mx="auto" >
-          <Typography align='center' className={classes.company} >COMPANY</Typography>
+          <Typography align='center' className={classes.company} variant='h6' >Company</Typography>
           <CompanyTab changeCompanyName={changeCompanyName} />
         </Box>
         <div style={{ margin: '15px' }}>
@@ -128,10 +130,11 @@ export default function Form (props) {
             <TextField
               required
               id="filled-multiline-static"
-              label="DESCRIPTION"
+              label="Description"
               multiline
               rows="10"
-              variant="outlined"
+              // variant="outlined"
+              variant="filled"
               fullWidth
               onChange={e => {
                 changeDescriptionValue(e.target.value)

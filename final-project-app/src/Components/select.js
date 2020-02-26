@@ -7,6 +7,8 @@ import Select from '@material-ui/core/Select'
 import Snackbar from '@material-ui/core/Snackbar'
 import MuiAlert from '@material-ui/lab/Alert'
 import { Redirect } from 'react-router-dom'
+import FormHelperText from '@material-ui/core/FormHelperText';
+import NativeSelect from '@material-ui/core/NativeSelect';
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -90,10 +92,8 @@ export default function StatusSelect(props) {
 
   return (
     <FormControl className={classes.formControl}>
-      <InputLabel shrink id="demo-simple-select-placeholder-label-label">
-        Status
-      </InputLabel>
-      <Select
+
+      {/* <Select
         labelId="demo-simple-select-placeholder-label-label"
         id="demo-simple-select-placeholder-label"
         value={status}
@@ -104,7 +104,17 @@ export default function StatusSelect(props) {
 
         <MenuItem value={'Active'}>Active</MenuItem>
         <MenuItem value={'Complete'}>Complete</MenuItem>
-      </Select>
+      </Select> */}
+          <NativeSelect
+      className={classes.selectEmpty}
+      value={status}
+      name="age"
+      onChange={handleChange}
+      // inputProps={{ 'aria-label': 'age' }}
+    >
+      <option value={'Active'} disabled >🟡 Active</option>
+      <option value={'Complete'}>🟢 Complete</option>
+    </NativeSelect>
       <Snackbar open={openSucsses} autoHideDuration={2500} onClose={handleClose}>
         <Alert severity="success">
           Task Status updated successfully !</Alert>
@@ -115,5 +125,24 @@ export default function StatusSelect(props) {
       {/* when change the status of a task, go back to home page */}
       {redirect ? <Redirect to="/home" /> : ''}
     </FormControl>
+
+
+  //   <FormControl className={classes.formControl}>
+  //   <NativeSelect
+  //     className={classes.selectEmpty}
+  //     value={status}
+  //     name="age"
+  //     onChange={handleChange('age')}
+  //     inputProps={{ 'aria-label': 'age' }}
+  //   >
+  //     <option value="" disabled>
+  //       Placeholder
+  //     </option>
+  //     <option value={10}>Ten</option>
+  //     <option value={20}>Twenty</option>
+  //     <option value={30}>Thirty</option>
+  //   </NativeSelect>
+  //   <FormHelperText>Placeholder</FormHelperText>
+  // </FormControl>
   )
 }

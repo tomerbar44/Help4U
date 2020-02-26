@@ -35,13 +35,14 @@ const useStyles = makeStyles(theme => ({
   Active: {
     backgroundColor: '#ffca28',
     float: 'right',
-    marginBottom: '8px'
+    marginBottom: '8px',
+    width:'89px'
   },
   Complete: {
     backgroundColor: '#66bb6a',
     float: 'right',
-    marginBottom: '8px'
-
+    marginBottom: '8px',
+    width:'89px'
   },
   navLinks: {
     textDecorationLine: 'none'

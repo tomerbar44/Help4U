@@ -11,6 +11,11 @@ import Typography from '@material-ui/core/Typography'
 import PieChart from 'react-minimal-pie-chart'
 import { Box } from '@material-ui/core'
 import { render } from 'react-dom'
+import { withStyles } from '@material-ui/core/styles'
+import {
+  Title,
+} from '@devexpress/dx-react-chart-material-ui'
+// import {Title} from '@devexpress/dx-react-chart-material-ui'
 
 const useStyles = makeStyles({
   table: {
@@ -20,6 +25,16 @@ const useStyles = makeStyles({
     marginTop: '10px'
   }
 })
+
+
+const styles = {
+  titleText: {
+	  textAlign: 'center'
+  },
+  legend: {
+	  display: 'contents'
+  },
+}
 const dataMock = [
   { title: 'Completed', value: 0, color: '#2ED47A' },
   { title: 'Active', value: 0, color: '#FFB946' }
@@ -30,7 +45,10 @@ const defaultLabelStyle = {
   fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
   fill: '#121212'
 }
+const TextComponent = withStyles(styles)(({ classes, ...restProps }) => (
 
+  <Title.Text {...restProps} className={classes.titleText} />
+))
 export default function MyPieChart (props) {
   const { allTasks } = props
   const classes = useStyles()
@@ -56,6 +74,7 @@ export default function MyPieChart (props) {
   return (
 
     <Paper variant="outlined" className={classes.PieChart}>
+      <Typography textAlign='center' align='center' variant={'h5'} style={{marginTop:'7px'}}> 🥧 Task Ratio  </Typography>
       <Box margin={2}>
         <PieChart
           animate={false}

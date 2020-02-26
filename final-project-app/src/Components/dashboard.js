@@ -250,25 +250,29 @@ export default function Dashboard () {
                 <Typography variant="body2" gutterBottom style={{ margin: '15px' }}> {`${currTask.selectedSubject}`} </Typography>
               </Grid>
               <Grid item lg={4}>
-                <Typography variant='h6' align='center' gutterBottom style={{ margin: '15px', paddingTop: '15px' }}>
+                <Typography variant='h6' align='center' gutterBottom style={{ margin: '15px' , opacity: '0.6' }}>
                   {/* show the relevant name taking with */}
                   {`Talking with:${JSON.parse(sessionStorage.getItem('isAdmin')) ? currTask.userName : currTask.companyID}`}
                 </Typography>
               </Grid>
-              {/* <Grid item lg={4}>
-              </Grid> */}
+              <Grid item lg={4}>
+              <Typography align='center' variant='h6'>
+                  {/* shows status selection only for admins and only for Active tasks */}
+                  { currTask.status === 'Active' && JSON.parse(sessionStorage.getItem('isAdmin')) && <StatusSelect taskID={currTask.taskID} parentTasks={allTasks} parnetSet={setAllUsersTasks}/>}
+                  {!JSON.parse(sessionStorage.getItem('isAdmin')) && ('Status')}
+                </Typography>
+                <Typography align='center' style={{opacity:'0.8'}}>
+                  {!JSON.parse(sessionStorage.getItem('isAdmin')) && ('🟡  ' + currTask.status)}
+                </Typography>
+              </Grid>
             </Grid>
 
             <Grid container justify="space-between" spacing={2} >
               <Grid item lg={4}>
-                <Typography variant='body1' gutterBottom style={{ margin: '15px' }}> Open at: {taskDate} </Typography>
+                <Typography variant='body1' gutterBottom style={{ margin: '15px', opacity: '0.6'}}> Open at: {taskDate} </Typography>
               </Grid>
               <Grid item lg={4} >
-                <Typography align='center'>
-                  {/* shows status selection only for admins and only for Active tasks */}
-                  { currTask.status === 'Active' && JSON.parse(sessionStorage.getItem('isAdmin')) && <StatusSelect taskID={currTask.taskID} parentTasks={allTasks} parnetSet={setAllUsersTasks}/>}
-                  {!JSON.parse(sessionStorage.getItem('isAdmin')) && ('Status: ' + currTask.status)}
-                </Typography>
+
               </Grid>
             </Grid>
           </Grid>
@@ -283,7 +287,7 @@ export default function Dashboard () {
 
                 <div className = {classes.flex} key = {i}>
                   <Chip label = {chat.from} style = {{ marginRight: '10px' }} />
-                  <Paper className = {classes.textBubble} variant = "elevation" style = {chat.from === userName ? { backgroundColor: '#5c6bc0' } : { backgroundColor: '#7e57c2' }}>
+                  <Paper className = {classes.textBubble} variant = "elevation" style = {chat.from === userName ? { backgroundColor: '#109CF1' } : { backgroundColor: '#F2F3F5' }}>
                     <Typography variant = 'body1' gutterBottom style = {{ margin: '15px', maxWidth: '100%' }}> {chat.message} </Typography>
                   </Paper>
                 </div>

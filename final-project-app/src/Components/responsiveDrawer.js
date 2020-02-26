@@ -87,13 +87,13 @@ const useStyles = makeStyles(theme => ({
   },
   taskResponsive:{
     [theme.breakpoints.down('sm')]: {
-      width: '300px',
+      width: '330px'
     },
     
     [theme.breakpoints.between('sm', 'md')]: {
       // display: 'none',
       // width: '300px',
-      width: '300px',
+      width: '330px',
     },
     [theme.breakpoints.up('lg')]: {
     
@@ -221,7 +221,7 @@ function ResponsiveDrawer (props) {
             <Grid container spacing={2}>
               <Grid item md={8} >
                 <Route exact path="/home" > <div className={classes.taskResponsive}> <Task allTasks={allUsersTasks} activeOnly={true} /></div> </Route>
-                <Route path="/home/chat" > <Chat allTasks={allUsersTasks} setAllUsersTasks = {setAllUsersTasks} /> </Route>
+                <Route path="/home/chat" > <div className={classes.taskResponsive}><Chat allTasks={allUsersTasks} setAllUsersTasks = {setAllUsersTasks} /></div> </Route>
                 <Route path="/home/tasks" > <div className={classes.taskResponsive}> <Task allTasks={allUsersTasks} activeOnly={false} /></div> </Route>
                 <Route path="/home/contacts" ><div className={classes.taskResponsive}>{JSON.parse(sessionStorage.getItem('isAdmin')) ? <Contacts allTasks={allUsersTasks} /> : <NotAllowPage/>}</div></Route>
                 <Route path="/home/create" ><div className={classes.taskResponsive}>{JSON.parse(sessionStorage.getItem('isAdmin')) ? <NotAllowPage/> : <Form setAllUsersTasks = {setAllUsersTasks}/>} </div></Route>
@@ -229,15 +229,11 @@ function ResponsiveDrawer (props) {
               </Grid>
               <Grid item md={4}>
               {
-              
               (window.location.pathname.split('/')[2]) == 'chat' || (window.location.pathname.split('/')[2]) == 'create' ? 
               <div className={classes.chatStatistc}><ComposeChart allTasks={allUsersTasks} /><MyPieChart allTasks={allUsersTasks} ></MyPieChart></div> : 
               <div className={classes.taskResponsive}><ComposeChart allTasks={allUsersTasks} /><MyPieChart allTasks={allUsersTasks} ></MyPieChart></div>
-              
               }
               
-                {/* <ComposeChart allTasks={allUsersTasks} />
-                <MyPieChart allTasks={allUsersTasks} ></MyPieChart> */}
               </Grid>
             </Grid>
           </Box>

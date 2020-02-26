@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
     width: '200px'
   },
   subject: {
-    marginBottom: '10px'
+    marginBottom: '15px'
   }
 
 }))
@@ -108,7 +108,7 @@ export default function Intentions() {
             required
             id="Title"
             name="Title"
-            label="TITLE"
+            label="Title"
             fullWidth
             onChange={e => {
               changeTitleValue(e.target.value)
@@ -116,7 +116,7 @@ export default function Intentions() {
           />
         </Typography>
         <Box mx="auto" >
-          <Typography align='center' className={classes.subject} >SUBJECT</Typography>
+          <Typography align='center' className={classes.subject} >Subject</Typography>
           <SubjectTab parentCallback={changecsubjectValue} />
         </Box>
         <Grid

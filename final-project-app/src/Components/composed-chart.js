@@ -12,6 +12,8 @@ import {
 } from '@devexpress/dx-react-chart-material-ui'
 import { EventTracker, HoverState, Stack, SelectionState } from '@devexpress/dx-react-chart'
 import { withStyles } from '@material-ui/core/styles'
+import { Box } from '@material-ui/core'
+
 
 
 const styles = {
@@ -20,7 +22,7 @@ const styles = {
   },
   legend: {
 	  display: 'contents'
-  }
+  },
 }
 
 const TextComponent = withStyles(styles)(({ classes, ...restProps }) => (
@@ -33,8 +35,10 @@ const LableComponent = withStyles(styles)(({ classes, ...restProps }) => (
 ))
 
 const stacks = [
-  { series: ['📒 Active', '✅ Completed'] }
+  { series: ['Active', 'Completed'] }
 ]
+
+
 
 
 export default function ComposedChart (props) {
@@ -64,25 +68,27 @@ export default function ComposedChart (props) {
   return (
     <Paper>
       <Chart
-	  data={chartData}
+    data={chartData}
+  
       >
 		  <BarSeries
-			  name="📒 Active"
+			  name="Active"
 			  valueField="A"
 			  argumentField="state"
 			  color='#ffb946'
 		  />
 	  <BarSeries
-          name="✅ Completed"
+          name="Completed"
           valueField="C"
           argumentField="state"
-		  color='#2ed47a'
+      color='#2ed47a'
 	  />
 	  <ArgumentAxis />
 	  <ValueAxis />
 	  <Stack
       stacks={stacks}
-	  />
+      
+      />
 	  <EventTracker />
 	  <Tooltip />
 	  <HoverState />
