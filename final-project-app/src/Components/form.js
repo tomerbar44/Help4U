@@ -51,7 +51,7 @@
 //   const { allTasks } = props;
 //   async function addTask(title, company, description) {
 //     try {
-//       const response = await fetch('https://mern-finalproj-api.herokuapp.com/Help4U/task/add', {
+//       const response = await fetch('https://final-projet-here4u.herokuapp.com/Help4U/task/add', {
 //         method: 'POST',
 //         headers: new Headers({
 //           'Content-Type': 'application/json'
@@ -224,7 +224,7 @@ export default function Form (props) {
   const { allTasks, setAllUsersTasks } = props
   async function addTask (title, company, description) {
     try {
-      const response = await fetch('https://mern-finalproj-api.herokuapp.com/Help4U/task/add', {
+      const response = await fetch('https://final-projet-here4u.herokuapp.com/Help4U/task/add', {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json'

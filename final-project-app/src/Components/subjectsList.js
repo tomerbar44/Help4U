@@ -72,7 +72,7 @@ export default function ScrollableTabsButtonAuto(props) {
   useEffect(() => {
     async function initsubjects() {
       try {
-        res = await fetch('https://mern-finalproj-api.herokuapp.com/Help4U/subjects').then(res => res.json())
+        res = await fetch('https://final-projet-here4u.herokuapp.com/Help4U/subjects').then(res => res.json())
       }
       catch (e) {
         // if fetch fail, reload and try again

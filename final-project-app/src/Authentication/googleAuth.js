@@ -5,11 +5,11 @@ import history from './history'
 
 const successGoogle = (response) => {
   console.log('response\n\n', response)
-
+  https://final-projet-here4u.herokuapp.com/
   // check if user is admin or customer
   async function checkIfUserExist () {
     try {
-      const user = await fetch('https://mern-finalproj-api.herokuapp.com/Help4U/user/check', {
+      const user = await fetch('https://final-projet-here4u.herokuapp.com/Help4U/user/check', {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json; charset=utf-8'
@@ -24,7 +24,7 @@ const successGoogle = (response) => {
       if (user.status === 200 && user.data !== null) {
         // update admin access token - only for admin API requests
         if (user.data.admin == true) {
-          const update = await fetch('https://mern-finalproj-api.herokuapp.com/Help4U/user/update', {
+          const update = await fetch('https://final-projet-here4u.herokuapp.com/Help4U/user/update', {
             method: 'PUT',
             mode: 'cors',
             headers: new Headers({
@@ -100,7 +100,8 @@ const isAuthenticated = () => {
 const signupUser = (response) => {
   async function signup () {
     try {
-      const user = await fetch('https://mern-finalproj-api.herokuapp.com/Help4U/user/create', {
+      const user = await fetch('https://final-projet-
+here4u.herokuapp.com/Help4U/user/create', {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json; charset=utf-8'

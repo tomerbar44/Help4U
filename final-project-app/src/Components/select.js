@@ -58,7 +58,7 @@ export default function StatusSelect(props) {
     let res
     async function changeStatus() {
       try {
-        res = await fetch(`https://mern-finalproj-api.herokuapp.com/Help4U/task/update/${taskID}`, {
+        res = await fetch(`https://final-projet-here4u.herokuapp.com/Help4U/task/update/${taskID}`, {
           method: 'PUT',
           mode: 'cors',
           headers: new Headers({
