@@ -1,6 +1,6 @@
 import React from 'react'
 import { isAuthenticated } from '../Authentication/googleAuth'
-import SignInSide from '../Components/login'
+import SignInSide from '../Components/loginPage'
 
 const Home = (props) => {
   const { message, newUser } = props

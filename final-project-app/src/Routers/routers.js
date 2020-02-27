@@ -1,9 +1,9 @@
-import React from 'react'
-import { Route, Router } from 'react-router-dom'
-import ResponsiveDrawer from '../Components/responsiveDrawer'
-import Home from '../Authentication/home'
-import { isAuthenticated } from '../Authentication/googleAuth'
-import history from '../Authentication/history'
+import React from 'react';
+import { Route, Router } from 'react-router-dom';
+import ResponsiveDrawer from '../Components/mainWindow';
+import Home from '../Authentication/home';
+import { isAuthenticated } from '../Authentication/googleAuth';
+import history from '../Authentication/history';
 
 const ReactRouter = () => {
   return (
@@ -13,7 +13,9 @@ const ReactRouter = () => {
       <Route path ="/error" component={() => <Home message={'Error occur, please try again'} newUser={false}/> } />
       <Route path ="/signup" component={() => <Home message={'Please signup first'} newUser={true}/> } />
     </Router>
-  )
-}
+  );
+};
 
-export default ReactRouter
+export default ReactRouter;
+
+

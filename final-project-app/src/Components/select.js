@@ -1,13 +1,9 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import InputLabel from '@material-ui/core/InputLabel'
-import MenuItem from '@material-ui/core/MenuItem'
-import FormControl from '@material-ui/core/FormControl'
-import Select from '@material-ui/core/Select'
-import Snackbar from '@material-ui/core/Snackbar'
-import MuiAlert from '@material-ui/lab/Alert'
-import { Redirect } from 'react-router-dom'
-import FormHelperText from '@material-ui/core/FormHelperText';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import { Redirect } from 'react-router-dom';
 import NativeSelect from '@material-ui/core/NativeSelect';
 
 const useStyles = makeStyles(theme => ({
@@ -18,48 +14,47 @@ const useStyles = makeStyles(theme => ({
   selectEmpty: {
     marginTop: theme.spacing(2)
   }
-}))
+}));
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />
+function Alert (props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-export default function StatusSelect(props) {
-  const { taskID, parentTasks ,parnetSet } = props
-  const classes = useStyles()
-  const [status, setStatus] = React.useState('Active')
-  const [openSucsses, setOpenSucsses] = React.useState(false)
-  const [openNotSucsses, setOpenNotSucsses] = React.useState(false)
-  const [redirect, setRedirect] = React.useState(false)
+export default function StatusSelect (props) {
+  const { taskID, setAllUsersTasks } = props;
+  const classes = useStyles();
+  const [status, setStatus] = React.useState('Active');
+  const [openSuccessBanner, setOpenSuccessBanner] = React.useState(false);
+  const [openFailBanner, setOpenFailBanner] = React.useState(false);
+  const [redirect, setRedirect] = React.useState(false);
 
-  const handleClickSucsses = () => {
-    setOpenSucsses(true)
-  }
+  const handleClickSuccess = () => {
+    setOpenSuccessBanner(true);
+  };
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
-      return
+      return;
     }
-    setOpenSucsses(false)
-    setRedirect(true)
-  }
+    setOpenSuccessBanner(false);
+    setRedirect(true);
+  };
   const handleNotSucssesClose = (event, reason) => {
     if (reason === 'clickaway') {
-      return
+      return;
     }
-    setOpenNotSucsses(false)
-  }
-  const handleClickNotSucsses = () => {
-    setOpenNotSucsses(true)
-  }
+    setOpenFailBanner(false);
+  };
 
+  const handleClickNotSuccess = () => {
+    setOpenFailBanner(true);
+  };
 
   const handleChange = event => {
-    setStatus(event.target.value)
-    let res
-    async function changeStatus() {
+    setStatus(event.target.value);
+    async function changeStatus () {
       try {
-        res = await fetch(`https://mern-finalproj-api.herokuapp.com/Help4U/task/update/${taskID}`, {
+        const res = await fetch(`https://mern-finalproj-api.herokuapp.com/Help4U/task/update/${taskID}`, {
           method: 'PUT',
           mode: 'cors',
           headers: new Headers({
@@ -70,47 +65,45 @@ export default function StatusSelect(props) {
             access_token: sessionStorage.getItem('access_token')
           })
         })
-          .then(res => res.json())
+          .then(res => res.json());
         if (res.status == 200 && res.data !== null) {
-          parnetSet(parentTasks => parentTasks.map(task => task.taskID !== taskID ? task : res.data));
-          handleClickSucsses()
+          setAllUsersTasks(parentTasks => parentTasks.map(task => task.taskID !== taskID ? task : res.data));
+          handleClickSuccess();
+        } else {
+          handleClickNotSuccess();
         }
-        else {
-          handleClickNotSucsses()
-        }
-      }
-         catch (e) {
+      } catch (e) {
         // if fetch fail, reload and try again
-        alert('something went work, page refreshing...')
+        alert('something went work, page refreshing...');
         setInterval(() => {
-          window.location.reload()
-        }, 4000)
+          window.location.reload();
+        }, 4000);
       }
     }
-    changeStatus()
-  }
+    changeStatus();
+  };
 
   return (
     <FormControl className={classes.formControl}>
-       <NativeSelect
-      className={classes.selectEmpty}
-      value={status}
-      name="age"
-      onChange={handleChange}
-    >
-      <option value={'Active'} disabled >🟡 Active</option>
-      <option value={'Complete'}>⁦🟢 Complete</option>
-    </NativeSelect>
-      <Snackbar open={openSucsses} autoHideDuration={2500} onClose={handleClose}>
+      <NativeSelect
+        className={classes.selectEmpty}
+        value={status}
+        name="status"
+        onChange={handleChange}
+      >
+        <option value={'Active'} disabled >🟡 Active</option>
+        <option value={'Complete'}>⁦🟢 Complete</option>
+      </NativeSelect>
+      <Snackbar open={openSuccessBanner} autoHideDuration={2500} onClose={handleClose}>
         <Alert severity="success">
-          Task Status updated successfully !</Alert>
+        Status changed to completed successfully !</Alert>
       </Snackbar>
-      <Snackbar open={openNotSucsses} onClose={handleNotSucssesClose} autoHideDuration={4000}>
+      <Snackbar open={openFailBanner} onClose={handleNotSucssesClose} autoHideDuration={4000}>
         <Alert severity="error">There is a problem , Try again !</Alert>
       </Snackbar>
       {/* when change the status of a task, go back to home page */}
       {redirect ? <Redirect to="/home" /> : ''}
     </FormControl>
 
-  )
+  );
 }

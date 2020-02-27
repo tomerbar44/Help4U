@@ -6,12 +6,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Loader from '../Components/loader'
+import Loader from '../Components/loader';
 
-
-
-let res;
-function TabPanel(props) {
+function TabPanel (props) {
   const { children, value, index, ...other } = props;
   return (
     <Typography
@@ -30,13 +27,13 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired
 };
 
-function a11yProps(index) {
+function a11yProps (index) {
   return {
     id: `scrollable-auto-tab-${index}`,
-    'aria-controls': `scrollable-auto-tabpanel-${index}`,
+    'aria-controls': `scrollable-auto-tabpanel-${index}`
   };
 }
 
@@ -44,23 +41,22 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
-    color: '#b9cdd3',
-  },
+    color: '#b9cdd3'
+  }
 }));
 
-
-export default function ScrollableTabsButtonAuto(props) {
+export default function SubjectList (props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-  const [subjects, setsubjects] = React.useState(null)
-  let currentSubject = "";
+  const [index, setIndex] = React.useState(0);
+  const [subjects, setSubjects] = React.useState(null);
+  let currentSubject = '';
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setIndex(newValue);
     currentSubject = subjects[newValue].name;
     sendData(currentSubject);
   };
@@ -70,33 +66,31 @@ export default function ScrollableTabsButtonAuto(props) {
   };
 
   useEffect(() => {
-    async function initsubjects() {
+    async function initSubjects () {
       try {
-        res = await fetch('https://mern-finalproj-api.herokuapp.com/Help4U/subjects').then(res => res.json())
-      }
-      catch (e) {
+        const res = await fetch('https://mern-finalproj-api.herokuapp.com/Help4U/subjects').then(res => res.json());
+        if (res.status == 200 && res.data != null) {
+          setSubjects(res.data);
+        }
+      } catch (e) {
         // if fetch fail, reload and try again
-        alert('something went work, page refreshing...')
+        alert('something went work, page refreshing...');
         setInterval(() => {
-          window.location.reload()
-        }, 4000)
-      }
-      if (res.status == 200 && res.data != null) {
-        setsubjects(res.data);
+          window.location.reload();
+        }, 4000);
       }
     }
-    initsubjects();
+    initSubjects();
   }, []);
 
   if (subjects == null) {
     return <Loader />;
-  }
-  else {
+  } else {
     return (
       <div className={classes.root}>
         <AppBar position="static" color="white">
           <Tabs
-            value={value}
+            value={index}
             onChange={handleChange}
             indicatorColor="primary"
             textColor="primary"
@@ -104,10 +98,8 @@ export default function ScrollableTabsButtonAuto(props) {
             scrollButtons="auto"
             aria-label="scrollable auto tabs example"
           >
-
             {subjects.map((name, index) => (
               <Tab key={index} label={name.name} {...a11yProps({ index })} />
-
             ))}
           </Tabs>
         </AppBar>

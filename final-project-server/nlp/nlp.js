@@ -2,16 +2,24 @@ var natural = require('natural');
 var classifier = new natural.BayesClassifier();
 const userModel = require('../models/userSchema');
 
-// train the algorithem by sentences when the server create
-classifier.addDocument('my tv not work', 'TV problems');
-classifier.addDocument('i cant see nothing in my tv', 'TV problems');
-classifier.addDocument('my wifi was disconnect', 'WIFI problems');
-classifier.addDocument('my wifi is not work again', 'WIFI problems');
-classifier.addDocument('I dont have a signal on the Internet at home.','WIFI problems');
-classifier.addDocument('The internet keeps disconnecting.', 'WIFI problems');
-classifier.addDocument('Your service sucks.', 'Want to disconnect');
-classifier.addDocument('I want to disconnect', 'Want to disconnect');
-classifier.addDocument('Youre not answering and the service is no good.', 'Want to disconnect');
+// train the algorithem by sentences when the server start working
+classifier.addDocument('my tv not work', 'TV');
+classifier.addDocument('i cant see nothing in my tv', 'TV');
+classifier.addDocument('Tv not working now!', 'TV');
+classifier.addDocument('my wifi was disconnect', 'Internet');
+classifier.addDocument('my wifi is not work again', 'Internet');
+classifier.addDocument('I dont have a signal on the Internet at home.','Internet');
+classifier.addDocument('The internet keeps disconnecting.', 'Internet');
+classifier.addDocument('Your service sucks.', 'Leave');
+classifier.addDocument('I want to disconnect', 'Leave');
+classifier.addDocument('I want to leave', 'Leave');
+classifier.addDocument('Your service is bad!', 'Leave');
+classifier.addDocument('Youre not answering and the service is no good.', 'Leave');
+classifier.addDocument('Im paying too much, I want a discount.', 'Financial');
+classifier.addDocument('The payment is too expensive.', 'Financial');
+classifier.addDocument('I want an invoice.', 'Financial');
+classifier.addDocument('The monthly payment should be cheaper', 'Financial');
+
 classifier.train();
 
 function findMeaning(title){

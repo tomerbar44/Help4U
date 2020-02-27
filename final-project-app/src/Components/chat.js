@@ -1,6 +1,6 @@
-import React from 'react'
-import Store from './store'
-import Dashboard from './dashboard'
+import React from 'react';
+import Store from './chatLogic';
+import Dashboard from './chatWindow';
 
 const Chat = (props) => {
   return (
@@ -9,7 +9,7 @@ const Chat = (props) => {
         <Dashboard/>
       </Store>
     </div>
-  )
-}
+  );
+};
 
-export default Chat
+export default Chat;

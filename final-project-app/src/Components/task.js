@@ -1,25 +1,21 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
-import Paper from '@material-ui/core/Paper'
-import Box from '@material-ui/core/Box'
-import Typography from '@material-ui/core/Typography'
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
 
 import {
   Chip
-  //  List,
-  //   ListItem
-} from '@material-ui/core'
-import { NavLink } from 'react-router-dom'
-import Grow from '@material-ui/core/Grow'
-
-export const queryRes = React.createContext()
+} from '@material-ui/core';
+import { NavLink } from 'react-router-dom';
+import Grow from '@material-ui/core/Grow';
 
 // the show the user only y/m/d
 function formatDate (date) {
-  date = date.slice(0, 10)
-  return date
+  date = date.slice(0, 10);
+  return date;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -36,13 +32,13 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#ffca28',
     float: 'right',
     marginBottom: '8px',
-    width:'89px'
+    width: '89px'
   },
   Complete: {
     backgroundColor: '#66bb6a',
     float: 'right',
     marginBottom: '8px',
-    width:'89px'
+    width: '89px'
   },
   navLinks: {
     textDecorationLine: 'none'
@@ -56,15 +52,15 @@ const useStyles = makeStyles(theme => ({
   header: {
     margin: '15px'
   }
-}))
+}));
 
-export default function OutlinedCard (props) {
+export default function Task (props) {
   const {
     allTasks,
     activeOnly
-  } = props
+  } = props;
 
-  const classes = useStyles()
+  const classes = useStyles();
 
   const createTask = (task, i) => {
     return (
@@ -77,7 +73,7 @@ export default function OutlinedCard (props) {
                   {task.title}
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                                    Due date: {formatDate(task.datesend)}
+                  Due date: {formatDate(task.datesend)}
                 </Typography>
                 <Chip className={task.status === 'Active' ? classes.Active : classes.Complete} label={task.status} />
               </CardContent>
@@ -85,27 +81,23 @@ export default function OutlinedCard (props) {
           </NavLink>
         </Box>
       </Grow>
-    )
-  }
+    );
+  };
 
-  // here we have to send the userID and create cards for each one
-
+  // generate tasks depends on activeOnly flag
   return (
-    <queryRes.Provider >
-      <Paper variant="outlined" className={classes.paper} >
-        <Typography   align='center' variant="h4" className={classes.header}> {activeOnly ? 'Active Tasks' : 'All Tasks'} </Typography>
-        {
-          allTasks.map((task, i) => {
-            if (activeOnly && task.status === 'Active') {
-              return createTask(task, i)
-            }
-            if (!activeOnly) {
-              return createTask(task, i)
-            }
-            
-          })
-        }
-      </Paper>
-    </queryRes.Provider>
-  )
+    <Paper variant="outlined" className={classes.paper} >
+      <Typography align='center' variant="h4" className={classes.header}> {activeOnly ? 'Active Tasks' : 'All Tasks'} </Typography>
+      {
+        allTasks.map((task, i) => {
+          if (activeOnly && task.status === 'Active') {
+            return createTask(task, i);
+          }
+          if (!activeOnly) {
+            return createTask(task, i);
+          }
+        })
+      }
+    </Paper>
+  );
 }

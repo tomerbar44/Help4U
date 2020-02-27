@@ -1,18 +1,18 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
-import CompanyTab from './companyList'
-import Snackbar from '@material-ui/core/Snackbar'
-import MuiAlert from '@material-ui/lab/Alert'
-import Box from '@material-ui/core/Box'
-import { Redirect } from 'react-router-dom'
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import CompanyTab from './companyList';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import Box from '@material-ui/core/Box';
+import { Redirect } from 'react-router-dom';
 
 function Alert (props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -26,9 +26,6 @@ const useStyles = makeStyles(theme => ({
     marginTop: '14px',
     backgroundColor: '#4caf50'
   },
-  padding: {
-    paddingLeft: '8px'
-  },
   title: {
     margin: '10px',
     width: '200px'
@@ -37,23 +34,22 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '15px'
   }
 
-}))
+}));
 
 export default function Form (props) {
-  const [titleValue, changeTitleValue] = React.useState('')
-  const [descriptionValue, changeDescriptionValue] = React.useState('')
-  const [companyName, changeCompanyName] = React.useState('')
-  const [taskIdValue, changecTaskIdValue] = React.useState('')
-  const [openSucssesBanner, setOpenSucssesBanner] = React.useState(false)
-  const [openNotSucssesBanner, setOpenNotSucssesBanner] = React.useState(false)
-  const [redirect, setRedirect] = React.useState(false)
-  const classes = useStyles()
-  const {setAllUsersTasks } = props
-
+  const [titleValue, changeTitleValue] = React.useState('');
+  const [descriptionValue, changeDescriptionValue] = React.useState('');
+  const [companyName, changeCompanyName] = React.useState('');
+  const [taskIdValue, changecTaskIdValue] = React.useState('');
+  const [openSucssesBanner, setOpenSucssesBanner] = React.useState(false);
+  const [openFailBanner, setOpenFailBanner] = React.useState(false);
+  const [redirect, setRedirect] = React.useState(false);
+  const classes = useStyles();
+  const { setAllUsersTasks } = props;
 
   async function addTask (title, company, description) {
     try {
-      const response = await fetch('https://mern-finalproj-api.herokuapp.com/Help4U/task/add', {
+      const res = await fetch('https://mern-finalproj-api.herokuapp.com/Help4U/task/add', {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json'
@@ -66,48 +62,50 @@ export default function Form (props) {
           title: title,
           chat: [{ from: sessionStorage.getItem('user_name'), message: description }]
         })
-      }).then(response => response.json())
-      if (response.status == 200 && response.data != null) {
-        changecTaskIdValue(response.data.taskID)
-        setAllUsersTasks(allTasks => ([...allTasks, response.data]))
-        handleClickSucsses()
+      }).then(res => res.json());
+
+      if (res.status == 200 && res.data != null) {
+        changecTaskIdValue(res.data.taskID);
+        setAllUsersTasks(allTasks => ([...allTasks, res.data]));
+        handleClickSucsses();
       } else {
-        handleClickNotSucsses()
+        handleClickNotSucsses();
       }
+      
     } catch (e) {
-      alert('something went work, page refreshing...')
+      alert('something went work, page refreshing...');
 
       setInterval(() => {
-        window.location.reload()
-      }, 4000)
+        window.location.reload();
+      }, 4000);
     }
   }
 
   const handleClickSucsses = () => {
-    setOpenSucssesBanner(true)
-  }
+    setOpenSucssesBanner(true);
+  };
 
   const handleClickNotSucsses = () => {
-    setOpenNotSucssesBanner(true)
-  }
+    setOpenFailBanner(true);
+  };
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
-      return
+      return;
     }
-    setRedirect(true)
-  }
+    setRedirect(true);
+  };
   const handleNotSucssesClose = (event, reason) => {
     if (reason === 'clickaway') {
-      return
+      return;
     }
-    setOpenNotSucssesBanner(false)
-  }
+    setOpenFailBanner(false);
+  };
 
   return (
     <Box mx="auto" >
       <Paper variant="outlined" className={classes.root} >
-      {<img style={{ float: 'right' }} src="https://img.icons8.com/doodle/80/000000/technical-support.png" />}
+        {<img style={{ float: 'right' }} src="https://img.icons8.com/doodle/80/000000/technical-support.png" />}
         <Typography className={classes.title}>
           <TextField
             required
@@ -116,16 +114,16 @@ export default function Form (props) {
             label="Title"
             fullWidth
             onChange={e => {
-              changeTitleValue(e.target.value)
+              changeTitleValue(e.target.value);
             }}
           />
         </Typography>
-       
-        <Box mx="auto" >
+
+        <Box mx="auto" style={{ margin: '12px' }} >
           <Typography align='center' className={classes.company} variant='h6' >Company</Typography>
           <CompanyTab changeCompanyName={changeCompanyName} />
         </Box>
-        <div style={{ margin: '15px' }}>
+        <div style={{ margin: '10px'}}>
           {
             <TextField
               required
@@ -133,11 +131,11 @@ export default function Form (props) {
               label="Description"
               multiline
               rows="10"
-              // variant="outlined"
               variant="filled"
+              style={{ opacity: '0.7' }}
               fullWidth
               onChange={e => {
-                changeDescriptionValue(e.target.value)
+                changeDescriptionValue(e.target.value);
               }}
             />
           }
@@ -152,7 +150,7 @@ export default function Form (props) {
           <Button variant="contained"
             className={classes.button}
             onClick={() => {
-              addTask(titleValue, companyName, descriptionValue)
+              addTask(titleValue, companyName, descriptionValue);
             }
             }
           >
@@ -163,7 +161,7 @@ export default function Form (props) {
               <Alert severity="success">
                 Your task has been successfully added !</Alert>
             </Snackbar>
-            <Snackbar open={openNotSucssesBanner} onClose={handleNotSucssesClose} autoHideDuration={4000}>
+            <Snackbar open={openFailBanner} onClose={handleNotSucssesClose} autoHideDuration={4000}>
               <Alert severity="error">There is a problem , Try again and fill all the fields !</Alert>
             </Snackbar>
           </div>
@@ -173,5 +171,5 @@ export default function Form (props) {
         redirect ? <Redirect to={`/home/chat/${taskIdValue}`} /> : ''
       }
     </Box>
-  )
+  );
 }

@@ -1,8 +1,8 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles'
-import ExitToAppIcon from '@material-ui/icons/ExitToApp'
-import { Box, Typography, ButtonBase } from '@material-ui/core'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { Box, Typography, ButtonBase } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   fade: {
@@ -15,7 +15,8 @@ const useStyles = makeStyles(theme => ({
       '& $backdrop': {
         opacity: 0.15
       }
-    }
+    },
+    paddingBottom: '8px'
   },
   focusVisible: {},
   backdrop: {
@@ -25,21 +26,19 @@ const useStyles = makeStyles(theme => ({
     top: 0,
     bottom: 0,
     backgroundColor: 'white',
-    transition: theme.transitions.create('opacity')
+    transition: theme.transitions.create('opacity'),
   },
   navLinks: {
     textDecorationLine: 'none',
     color: 'unset'
   }
-}))
+}));
 
 function Logout (props) {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
     <Box margin={3} mx={2}>
-
       <NavLink exact to='/' className={classes.navLinks}>
-
         <ButtonBase
           focusRipple
           key={0}
@@ -55,7 +54,7 @@ function Logout (props) {
               <ExitToAppIcon fontSize='large' />
             </Box>
           </span>
-          <Typography>
+          <Typography >
             Logout
           </Typography>
 
@@ -63,7 +62,7 @@ function Logout (props) {
       </NavLink>
     </Box>
 
-  )
+  );
 }
 
-export default Logout
+export default Logout;

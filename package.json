@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/TalAdivi/final-project-MERN/issues"
   },
-  "homepage": "https://github.com/TalAdivi/final-project-MERN#readme"
+  "homepage": "https://github.com/TalAdivi/final-project-MERN#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
 }

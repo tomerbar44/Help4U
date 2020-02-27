@@ -1,9 +1,9 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Avatar from '@material-ui/core/Avatar'
-import Box from '@material-ui/core/Box'
-import ButtonBase from '@material-ui/core/ButtonBase'
-import Typography from '@material-ui/core/Typography'
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Avatar from '@material-ui/core/Avatar';
+import Box from '@material-ui/core/Box';
+import ButtonBase from '@material-ui/core/ButtonBase';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
   fade: {
@@ -16,7 +16,8 @@ const useStyles = makeStyles(theme => ({
       '& $backdrop': {
         opacity: 0.15
       }
-    }
+    },
+    marginTop: '8px'
   },
   focusVisible: {},
   backdrop: {
@@ -28,7 +29,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: 'white',
     transition: theme.transitions.create('opacity')
   },
-
   avatar: {
     margin: 'auto'
   },
@@ -36,14 +36,14 @@ const useStyles = makeStyles(theme => ({
     textDecorationLine: 'none',
     color: 'unset'
   }
-}))
+}));
 
 const realoadPage = () => {
-  window.location.reload()
-}
+  window.location.reload();
+};
 
 export default function Profile () {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
 
     <ButtonBase
@@ -53,15 +53,12 @@ export default function Profile () {
       focusVisibleClassName={classes.focusVisible}
       style={{
         width: '100%'
-
       }}
       type='reset'
       onClick={realoadPage}
-
     >
       <span className={classes.backdrop} />
       <Box mx="auto" mt='2px'>
-
         <Avatar alt={sessionStorage.getItem('user_name')} src={sessionStorage.getItem('profile_img')} className={classes.avatar} />
         <Box mt ='6px'>
           <Typography>
@@ -71,5 +68,5 @@ export default function Profile () {
       </Box>
     </ButtonBase>
 
-  )
+  );
 }

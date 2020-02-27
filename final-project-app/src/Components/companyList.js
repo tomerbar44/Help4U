@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
-import { makeStyles } from '@material-ui/core/styles'
-import AppBar from '@material-ui/core/AppBar'
-import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
-import Typography from '@material-ui/core/Typography'
-import Box from '@material-ui/core/Box'
-import Loader from '../Components/loader'
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import Loader from '../Components/loader';
 
 function TabPanel (props) {
-  const { children, value, index, ...other } = props
+  const { children, value, index, ...other } = props;
   return (
     <Typography
       component="div"
@@ -21,20 +21,20 @@ function TabPanel (props) {
     >
       {value === index && <Box p={3}>{children}</Box>}
     </Typography>
-  )
+  );
 }
 
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired
-}
+};
 
 function a11yProps (index) {
   return {
     id: `scrollable-auto-tab-${index}`,
     'aria-controls': `scrollable-auto-tabpanel-${index}`
-  }
+  };
 }
 
 const useStyles = makeStyles(theme => ({
@@ -44,47 +44,45 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper
   }
 
-}))
+}));
 
 export default function ScrollableTabsButtonAuto (props) {
-  const classes = useStyles()
-  const [value, setValue] = React.useState(0)
-  const [companies, setCompanies] = React.useState(null)
-  let currentCompanyName = ''
-  
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+  const [companies, setCompanies] = React.useState(null);
+  let currentCompanyName = '';
 
   const handleChange = (event, newValue) => {
-    setValue(newValue)
-    currentCompanyName = companies[newValue].name
-    sendData(currentCompanyName)
-  }
+    setValue(newValue);
+    currentCompanyName = companies[newValue].name;
+    sendData(currentCompanyName);
+  };
 
   const sendData = (currentCompanyName) => {
-    props.changeCompanyName(currentCompanyName)
-  }
+    props.changeCompanyName(currentCompanyName);
+  };
 
   useEffect(() => {
     async function initCompanies () {
-      let res
       try {
-        res = await fetch('https://mern-finalproj-api.herokuapp.com/Help4U/companies').then(res => res.json())
+        const res = await fetch('https://mern-finalproj-api.herokuapp.com/Help4U/companies').then(res => res.json());
+        if (res.status == 200 && res.data != null) {
+          setCompanies(res.data);
+          sendData(res.data[0].name); // the first tab is selected
+        }
       } catch (e) {
         // if fetch fail, reload and try again
-        alert('something went work, page refreshing...')
+        alert('something went work, page refreshing...');
         setInterval(() => {
-          window.location.reload()
-        }, 4000)
-      }
-      if (res.status == 200 && res.data != null) {
-        setCompanies(res.data)
-        sendData(res.data[0].name) // the first tab is selected
+          window.location.reload();
+        }, 4000);
       }
     }
-    initCompanies()
-  }, [])
+    initCompanies();
+  }, []);
 
   if (companies == null) {
-    return <Loader />
+    return <Loader />;
   } else {
     return (
       <div className={classes.root}>
@@ -104,6 +102,6 @@ export default function ScrollableTabsButtonAuto (props) {
           </Tabs>
         </AppBar>
       </div>
-    )
+    );
   }
 }
