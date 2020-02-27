@@ -92,28 +92,14 @@ export default function StatusSelect(props) {
 
   return (
     <FormControl className={classes.formControl}>
-
-      {/* <Select
-        labelId="demo-simple-select-placeholder-label-label"
-        id="demo-simple-select-placeholder-label"
-        value={status}
-        onChange={handleChange}
-        displayEmpty
-        className={classes.selectEmpty}
-      >
-
-        <MenuItem value={'Active'}>Active</MenuItem>
-        <MenuItem value={'Complete'}>Complete</MenuItem>
-      </Select> */}
-          <NativeSelect
+       <NativeSelect
       className={classes.selectEmpty}
       value={status}
       name="age"
       onChange={handleChange}
-      // inputProps={{ 'aria-label': 'age' }}
     >
       <option value={'Active'} disabled >🟡 Active</option>
-      <option value={'Complete'}>🟢 Complete</option>
+      <option value={'Complete'}>⁦🟢 Complete</option>
     </NativeSelect>
       <Snackbar open={openSucsses} autoHideDuration={2500} onClose={handleClose}>
         <Alert severity="success">
@@ -126,23 +112,5 @@ export default function StatusSelect(props) {
       {redirect ? <Redirect to="/home" /> : ''}
     </FormControl>
 
-
-  //   <FormControl className={classes.formControl}>
-  //   <NativeSelect
-  //     className={classes.selectEmpty}
-  //     value={status}
-  //     name="age"
-  //     onChange={handleChange('age')}
-  //     inputProps={{ 'aria-label': 'age' }}
-  //   >
-  //     <option value="" disabled>
-  //       Placeholder
-  //     </option>
-  //     <option value={10}>Ten</option>
-  //     <option value={20}>Twenty</option>
-  //     <option value={30}>Thirty</option>
-  //   </NativeSelect>
-  //   <FormHelperText>Placeholder</FormHelperText>
-  // </FormControl>
   )
 }

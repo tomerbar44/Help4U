@@ -39,13 +39,13 @@ const useStyles = makeStyles(theme => ({
     display: 'flex'
   },
   drawer: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       width: drawerWidth,
       flexShrink: 0
     }
   },
   appBar: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth
     },
@@ -54,7 +54,7 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       display: 'none'
     }
   },
@@ -87,13 +87,11 @@ const useStyles = makeStyles(theme => ({
   },
   taskResponsive:{
     [theme.breakpoints.down('sm')]: {
-      width: '330px'
+      width: '330px',
     },
     
     [theme.breakpoints.between('sm', 'md')]: {
-      // display: 'none',
-      // width: '300px',
-      width: '330px',
+      width: '400px',
     },
     [theme.breakpoints.up('lg')]: {
     
@@ -195,7 +193,7 @@ function ResponsiveDrawer (props) {
             </Toolbar>
           </AppBar>
           <nav className={classes.drawer} aria-label="mailbox folders">
-            <Hidden smUp implementation="css">
+            <Hidden smUp  implementation="css">
 
               <Drawer container={container} variant="temporary" anchor={theme.direction === 'rtl' ? 'right' : 'left'} open={mobileOpen}
                 onClose={handleDrawerToggle}
@@ -206,7 +204,7 @@ function ResponsiveDrawer (props) {
                 <MySideBar/>
               </Drawer>
             </Hidden>
-            <Hidden  xsDown implementation="css">
+            <Hidden smDown implementation="css">
               <Drawer classes={{ paper: classes.drawerPaper }} variant="permanent" open >
                 <Profile/>
                 <MySideBar/>

@@ -35,13 +35,13 @@ export default function SimpleTable(props) {
     allTasks.map(task => {
       let obj = myMap.get(task.userID);
       if (obj == undefined) {
-        task.status == 'Active' ? myMap.set(task.userID, { name: task.userName, active: 1, completed: 0, subjects: [task.selectedSubject + ' '] })
-          : myMap.set(task.userID, { name: task.userName, active: 0, completed: 1, subjects: [task.selectedSubject + ' '] });
+        task.status == 'Active' ? myMap.set(task.userID, { name: task.userName, active: 1, completed: 0, subjects: [task.selectedSubject + '.  '] })
+          : myMap.set(task.userID, { name: task.userName, active: 0, completed: 1, subjects: [task.selectedSubject + '.  '] });
       }
       else {
         task.status == 'Active' ? obj.active += 1 : obj.completed += 1;
-        if (obj.subjects.indexOf(task.selectedSubject + ' ') == -1) {
-          obj.subjects.push(task.selectedSubject + ' ');
+        if (obj.subjects.indexOf(task.selectedSubject + '.  ') == -1) {
+          obj.subjects.push(task.selectedSubject + '.  ');
         }
       }
     })
