@@ -40,6 +40,7 @@ const successGoogle = (response) => {
   };
 
   checkIfUserExist();
+  // setSession(response, 'user.data');
 };
 
 const updateAdminAccessToken = async (response) => {
@@ -61,13 +62,14 @@ const updateAdminAccessToken = async (response) => {
 };
 
 const setSession = (response, userData) => {
+
   // session is available for 1h
   const expiresAt = JSON.stringify((response.tokenObj.expires_in * 1000) + new Date().getTime());
   sessionStorage.setItem('expires_at', expiresAt);
   sessionStorage.setItem('isAdmin', userData.admin);
-  sessionStorage.setItem('user_name', response.Rt.Ad);
+  sessionStorage.setItem('user_name', response.profileObj.name);
   sessionStorage.setItem('user_id', response.googleId);
-  sessionStorage.setItem('profile_img', response.Rt.kL);
+  sessionStorage.setItem('profile_img', response.profileObj.imageUrl);
   sessionStorage.setItem('company_name', userData.company);
   sessionStorage.setItem('access_token', response.uc.access_token);
 };
@@ -106,6 +108,7 @@ const signupUser = (response) => {
       }).then(res => res.json());
       if (res.status == 200 && res.data !== null) {
         setSession(response, { admin: false, company: '' });
+
         history.replace('/home');
       } else {
         history.replace('/error');
