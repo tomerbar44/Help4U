@@ -35,6 +35,9 @@ app.use('/Help4U/subjects', subjectApi);
 app.use('/Help4U/companies', companyApi);
 app.use('/Help4U/user', userApi);
 app.use('/Help4U/intentions', intentionsApi);
+app.use('*', (req, res) => {
+  res.redirect('/');
+});
 app.get('*', (req, res) => {
   res.status(404).json({
       status:404,
