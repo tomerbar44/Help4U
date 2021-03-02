@@ -1,4 +1,4 @@
-This project developed by [Tal Adivi](https://github.com/TalAdivi), [Tomer Bar](https://github.com/tomerbar44).
+This project developed by [Tal Adivi](https://github.com/TalAdivi), [Tomer Bar](https://github.com/tomerbar44) as a final project on Distributed Cloud (RESTful) Services course using MERN stack.
 
 ## Help4U - Short brief
 This application allow companies costumer service to manage their clients request, the company representee can track the amount of active requests, the ratio between complete requests and active, he can track witch subject the request made (eg financial, want to leave, low internet quality.. ).
